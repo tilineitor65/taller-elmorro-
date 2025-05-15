@@ -120,7 +120,7 @@ export default function Registro() {
       </label>
 
       {necesitaFactura && monto && (
-        <div className="bg-gray-100 p-3 rounded mb-4 text-sm text-gray-800">
+        <div className="bg-gray-100 p-3 rounded mb-4 text-sm text-black-800">
           <p><strong>Subtotal:</strong> ${parseFloat(monto).toFixed(2)}</p>
           <p><strong>IVA (16%):</strong> ${(parseFloat(monto) * 0.16).toFixed(2)}</p>
           <p className="font-bold"><strong>Total:</strong> ${(parseFloat(monto) * 1.16).toFixed(2)}</p>
