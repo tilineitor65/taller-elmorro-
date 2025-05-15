@@ -48,10 +48,10 @@ export default function Registro() {
 
   if (folio) {
     return (
-      <div className="text-center p-8 bg-white rounded shadow-md">
+      <div className="text-center p-8 bg-white text-black rounded shadow-md">
         <h2 className="text-2xl font-bold mb-4">Nota registrada</h2>
         <p className="text-lg">Folio:</p>
-        <p className="text-3xl font-bold text-green-600">{folio}</p>
+        <p className="text-3xl font-bold text-green-700">{folio}</p>
         <button
           onClick={() => {
             setFolio(null);
@@ -70,70 +70,89 @@ export default function Registro() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="max-w-md mx-auto bg-white p-6 rounded shadow">
+    <form
+      onSubmit={handleSubmit}
+      className="max-w-md mx-auto bg-white text-black p-6 rounded shadow"
+    >
       <h1 className="text-xl font-bold mb-4 text-center">Registro de Nota</h1>
 
-      <label className="block mb-1 font-medium">Tipo:</label>
-      <select
-        value={tipo}
-        onChange={(e) => setTipo(e.target.value)}
-        className="w-full border px-3 py-2 mb-4 rounded"
-      >
-        <option>Servicio</option>
-        <option>Pieza</option>
-      </select>
-
-      <label className="block mb-1 font-medium">Carro:</label>
-      <input
-        type="text"
-        value={carro}
-        onChange={(e) => setCarro(e.target.value)}
-        required
-        className="w-full border px-3 py-2 mb-4 rounded"
-      />
-
-      <label className="block mb-1 font-medium">Descripción:</label>
-      <textarea
-        value={descripcion}
-        onChange={(e) => setDescripcion(e.target.value)}
-        required
-        className="w-full border px-3 py-2 mb-4 rounded"
-      />
-
-      <label className="block mb-1 font-medium">Monto:</label>
-      <input
-        type="number"
-        value={monto}
-        onChange={(e) => setMonto(e.target.value)}
-        required
-        className="w-full border px-3 py-2 mb-4 rounded"
-      />
-
-      <label className="flex items-center mb-4">
-        <input
-          type="checkbox"
-          checked={necesitaFactura}
-          onChange={(e) => setNecesitaFactura(e.target.checked)}
-          className="mr-2"
-        />
-        ¿Necesita factura? (se suma IVA 16%)
-      </label>
-
-      {necesitaFactura && monto && (
-        <div className="bg-gray-100 p-3 rounded mb-4 text-sm text-black-800">
-          <p><strong>Subtotal:</strong> ${parseFloat(monto).toFixed(2)}</p>
-          <p><strong>IVA (16%):</strong> ${(parseFloat(monto) * 0.16).toFixed(2)}</p>
-          <p className="font-bold"><strong>Total:</strong> ${(parseFloat(monto) * 1.16).toFixed(2)}</p>
+      <div className="space-y-4">
+        <div>
+          <label className="block mb-1 font-semibold text-black">Tipo:</label>
+          <select
+            value={tipo}
+            onChange={(e) => setTipo(e.target.value)}
+            className="w-full bg-white text-black border border-gray-400 rounded px-3 py-2"
+            required
+          >
+            <option value="">Selecciona el tipo</option>
+            <option value="Servicio">Servicio</option>
+            <option value="Pieza">Pieza</option>
+          </select>
         </div>
-      )}
 
-      <button
-        type="submit"
-        className="w-full bg-blue-600 text-white py-2 rounded"
-        disabled={registrando}
-      >
-        {registrando ? 'Registrando...' : 'Registrar'}
-      </button>
+        <div>
+          <label className="block mb-1 font-semibold text-black">Carro:</label>
+          <input
+            type="text"
+            value={carro}
+            onChange={(e) => setCarro(e.target.value)}
+            className="w-full bg-white text-black border border-gray-400 rounded px-3 py-2"
+            required
+          />
+        </div>
+
+        <div>
+          <label className="block mb-1 font-semibold text-black">Descripción:</label>
+          <textarea
+            value={descripcion}
+            onChange={(e) => setDescripcion(e.target.value)}
+            className="w-full bg-white text-black border border-gray-400 rounded px-3 py-2"
+            required
+          />
+        </div>
+
+        <div>
+          <label className="block mb-1 font-semibold text-black">Monto:</label>
+          <input
+            type="number"
+            value={monto}
+            onChange={(e) => setMonto(e.target.value)}
+            className="w-full bg-white text-black border border-gray-400 rounded px-3 py-2"
+            required
+          />
+        </div>
+
+        <div className="flex items-center">
+          <input
+            type="checkbox"
+            checked={necesitaFactura}
+            onChange={(e) => setNecesitaFactura(e.target.checked)}
+            className="mr-2"
+          />
+          <label className="text-sm text-black">
+            ¿Necesita factura? (se suma IVA 16%)
+          </label>
+        </div>
+
+        {necesitaFactura && monto && (
+          <div className="bg-gray-100 p-3 rounded text-sm text-gray-800">
+            <p><strong>Subtotal:</strong> ${parseFloat(monto).toFixed(2)}</p>
+            <p><strong>IVA (16%):</strong> ${(parseFloat(monto) * 0.16).toFixed(2)}</p>
+            <p className="font-bold">
+              <strong>Total:</strong> ${(parseFloat(monto) * 1.16).toFixed(2)}
+            </p>
+          </div>
+        )}
+
+        <button
+          type="submit"
+          className="w-full bg-blue-600 text-white py-2 rounded"
+          disabled={registrando}
+        >
+          {registrando ? 'Registrando...' : 'Registrar'}
+        </button>
+      </div>
     </form>
   );
 }
